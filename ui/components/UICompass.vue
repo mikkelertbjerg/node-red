@@ -7,32 +7,51 @@
             <div class="compass-container">
                 <!-- Visual Compass -->
                 <div class="compass-visual">
-                    <!-- Compass Circle Background -->
-                    <svg class="compass-circle" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="32" cy="32" r="31" fill="none" stroke="currentColor" stroke-width="2" />
-                        <!-- Cardinal directions -->
-                        <text x="32" y="10" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">N</text>
-                        <text x="54" y="35" text-anchor="middle" font-size="10" fill="currentColor">E</text>
-                        <text x="32" y="58" text-anchor="middle" font-size="10" fill="currentColor">S</text>
-                        <text x="10" y="35" text-anchor="middle" font-size="10" fill="currentColor">W</text>
+                    <!-- Compass Circle with Markings -->
+                    <svg class="compass-circle" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Main circle -->
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="2" />
+
+                        <!-- Degree tick marks every 30° -->
+                        <line v-for="deg in [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]"
+                              :key="deg"
+                              :x1="50 + 45 * Math.sin(deg * Math.PI / 180)"
+                              :y1="50 - 45 * Math.cos(deg * Math.PI / 180)"
+                              :x2="50 + 40 * Math.sin(deg * Math.PI / 180)"
+                              :y2="50 - 40 * Math.cos(deg * Math.PI / 180)"
+                              stroke="currentColor"
+                              stroke-width="1.5" />
+
+                        <!-- Cardinal directions (inside circle) -->
+                        <text x="50" y="18" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">N</text>
+                        <text x="82" y="53" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">E</text>
+                        <text x="50" y="86" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">S</text>
+                        <text x="18" y="53" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">W</text>
+
+                        <!-- Intercardinal directions (smaller) -->
+                        <text x="73" y="30" text-anchor="middle" font-size="6" fill="currentColor" opacity="0.7">NE</text>
+                        <text x="73" y="73" text-anchor="middle" font-size="6" fill="currentColor" opacity="0.7">SE</text>
+                        <text x="27" y="73" text-anchor="middle" font-size="6" fill="currentColor" opacity="0.7">SW</text>
+                        <text x="27" y="30" text-anchor="middle" font-size="6" fill="currentColor" opacity="0.7">NW</text>
                     </svg>
 
-                    <!-- Rotating Needle -->
+                    <!-- Rotating Needle (extends past circle) -->
                     <svg
                         class="compass-needle"
-                        viewBox="0 0 8 62"
+                        viewBox="0 0 10 100"
                         xmlns="http://www.w3.org/2000/svg"
                         :style="{ transform: `rotate(${heading}deg)` }"
                     >
-                        <path d="M4 0L8 31L0 31L4 0Z" fill="#FF5252" />
-                        <path d="M4 31L0 0L8 0L4 31Z" fill="#424242" transform="translate(0 31)" />
+                        <path d="M5 0L9 48L1 48L5 0Z" fill="#FF5252" />
+                        <path d="M5 52L1 48L9 48L5 52Z" fill="#424242" />
+                        <circle cx="5" cy="50" r="3" fill="currentColor" />
                     </svg>
                 </div>
 
-                <!-- Numeric Display -->
+                <!-- Numeric Display with Cardinal Direction -->
                 <div class="compass-display">
-                    <span class="heading-value">{{ displayHeading }}</span>
-                    <span class="degree-symbol">°</span>
+                    <span class="heading-value">{{ displayHeading }}°</span>
+                    <span class="cardinal-direction">{{ cardinalDirection }}</span>
                 </div>
             </div>
         </v-card-text>
@@ -59,6 +78,13 @@ export default {
             return this.heading % 1 === 0
                 ? this.heading.toFixed(0)
                 : this.heading.toFixed(1);
+        },
+        cardinalDirection() {
+            // Calculate cardinal/intercardinal direction
+            const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE',
+                              'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+            const index = Math.round(this.heading / 22.5) % 16;
+            return directions[index];
         }
     },
     created() {
@@ -93,8 +119,8 @@ export default {
 
 .compass-visual {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -110,19 +136,20 @@ export default {
 
 .compass-needle {
     position: absolute;
-    width: 12%;
-    height: 92%;
-    top: 4%;
-    left: 44%;
+    width: 10%;
+    height: 100%;
+    top: 0;
+    left: 45%;
     transition: transform 0.3s ease-out;
     transform-origin: center center;
 }
 
 .compass-display {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
+    gap: 0.5rem;
+    font-size: 2rem;
     font-weight: 300;
     line-height: 1;
 }
@@ -131,8 +158,9 @@ export default {
     font-variant-numeric: tabular-nums;
 }
 
-.degree-symbol {
-    font-size: 1.8rem;
-    margin-left: 0.1em;
+.cardinal-direction {
+    font-size: 1.5rem;
+    font-weight: 500;
+    opacity: 0.8;
 }
 </style>
