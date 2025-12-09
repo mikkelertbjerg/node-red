@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg width="2" height="15" viewBox="0 0 2 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g>
-    <path d="M1 0L2 7.5L0 7.5L1 0Z" fill="#FF5252" fill-rule="evenodd" transform="translate(7 0.5)" />
-    <path d="M1 0L2 7.5L0 7.5L1 0Z" fill="#000000" fill-rule="evenodd" transform="matrix(-1 -0 0 -1 9 15.5)" />
-  </g>
-</svg>

@@ -1,34 +1,36 @@
 # Node-RED Dashboard 2.0 Compass Widget
 
-A custom widget for Node-RED Dashboard 2.0 that displays compass heading in degrees (0-360°).
+A custom widget for Node-RED Dashboard 2.0 that displays compass heading in degrees (0-360°) with a visual compass and rotating needle.
 
 ## Features
 
-- Real-time display of compass heading
-- Clean, simple numeric display with degree symbol
+- **Visual compass display** with rotating needle
+- **Real-time heading updates** with smooth animation
+- **Numeric display** showing degree value
+- Red needle tip points north, dark gray tip points south
+- Cardinal direction labels (N, E, S, W)
 - Automatic normalization of input values to 0-360° range
 - Built with Vuetify components for consistent Dashboard 2.0 styling
 - Responsive design that fits Dashboard 2.0 grid layout
 
 ## Installation
 
-### From npm (once published)
+### Via npm
 
 ```bash
 cd ~/.node-red
-npm install @your-scope/node-red-dashboard-2-ui-compass
+npm install @wexgaard/node-red-dashboard-2-ui-compass
 ```
 
-### Local Installation (Development)
+Then restart Node-RED.
 
-1. Clone or download this repository
-2. In your Node-RED user directory (typically `~/.node-red`):
+### Via Node-RED Palette Manager
 
-```bash
-npm install /path/to/node-red-dashboard-2-ui-compass
-```
-
-3. Restart Node-RED
+1. Open Node-RED editor
+2. Click **☰ menu → Manage palette**
+3. Go to the **Install** tab
+4. Search for `@wexgaard/node-red-dashboard-2-ui-compass`
+5. Click **Install**
 
 ## Usage
 
@@ -38,8 +40,8 @@ npm install /path/to/node-red-dashboard-2-ui-compass
 2. Double-click to configure:
    - **Group**: Select a Dashboard 2.0 group (required)
    - **Label**: Optional label to display above the compass
-   - **Width**: Widget width in grid units (1-12, default: 6)
-   - **Height**: Widget height in grid units (default: 2)
+   - **Width**: Widget width in grid units (1-12, default: 2)
+   - **Height**: Widget height in grid units (default: 5)
 3. Connect a node that outputs numeric values to the compass node
 4. Deploy your flow
 
@@ -91,8 +93,8 @@ return msg;
         "name": "Direction",
         "group": "group-id",
         "label": "Heading",
-        "width": 6,
-        "height": 2,
+        "width": 2,
+        "height": 5,
         "x": 350,
         "y": 100,
         "wires": []
@@ -131,43 +133,20 @@ return msg;
 - @flowfuse/node-red-dashboard v1.0.0 or higher
 - Node.js v14.0.0 or higher
 
-## Development
-
-### Project Structure
-
-```
-node-red-dashboard-2-ui-compass/
-├── package.json                    # Package configuration
-├── README.md                       # This file
-├── nodes/
-│   ├── ui-compass.js              # Node-RED node backend
-│   └── ui-compass.html            # Node configuration UI
-└── ui/
-    └── components/
-        └── UICompass.vue          # Vue component for widget display
-```
-
-### Future Enhancements
-
-This widget is designed to be expandable. Potential future features include:
-
-- Visual compass graphic with rotating needle
-- Cardinal direction labels (N, E, S, W, NE, etc.)
-- Customizable colors and themes
-- Optional text display alongside visual compass
-- Magnetic declination correction
-- Compass rose background
-
 ## License
 
 MIT
 
-## Contributing
+## Author
 
-Issues and pull requests are welcome!
+Mikkel Nygaard
+
+## Repository
+
+https://github.com/mikkelertbjerg/node-red
 
 ## Support
 
-For issues related to this widget, please open an issue on the repository.
+For issues related to this widget, please open an issue on the [GitHub repository](https://github.com/mikkelertbjerg/node-red/issues).
 
 For general Node-RED Dashboard 2.0 questions, visit the [Node-RED forums](https://discourse.nodered.org/).
