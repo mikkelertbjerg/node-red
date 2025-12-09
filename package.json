@@ -1,0 +1,61 @@
+{
+  "name": "@wexgaard/node-red-dashboard-2-ui-compass",
+  "version": "0.1.0",
+  "description": "A compass widget for Node-RED Dashboard 2.0 that displays directional heading (0-360 degrees)",
+  "keywords": [
+    "node-red",
+    "node-red-dashboard-2",
+    "dashboard",
+    "ui",
+    "compass",
+    "direction",
+    "heading"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "exports": {
+    "import": "./resources/ui-compass.esm.js",
+    "require": "./resources/ui-compass.umd.js"
+  },
+  "node-red": {
+    "version": ">=3.0.0",
+    "nodes": {
+      "ui-compass": "nodes/ui-compass.js"
+    }
+  },
+  "node-red-dashboard-2": {
+    "version": "1.0.0",
+    "widgets": {
+      "ui-compass": {
+        "output": "ui-compass.umd.js",
+        "component": "UICompass"
+      }
+    }
+  },
+  "files": [
+    "nodes/*",
+    "ui/*",
+    "resources/*"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "dependencies": {
+    "@flowfuse/node-red-dashboard": "^1.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vite": "^5.0.0",
+    "vite-plugin-css-injected-by-js": "^3.3.0",
+    "vite-plugin-static-copy": "^1.0.6",
+    "vue": "^3.4.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

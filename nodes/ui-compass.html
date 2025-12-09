@@ -1,0 +1,105 @@
+<script type="text/javascript">
+    RED.nodes.registerType('ui-compass', {
+        category: 'dashboard',
+        color: '#4682B4',
+        defaults: {
+            group: { type: 'ui-group', required: true },
+            name: { value: '' },
+            label: { value: 'Compass' },
+            order: { value: 0 },
+            width: {
+                value: 6,
+                validate: function(v) {
+                    return !v || (parseInt(v) >= 1 && parseInt(v) <= 12);
+                }
+            },
+            height: {
+                value: 2,
+                validate: function(v) {
+                    return !v || parseInt(v) >= 1;
+                }
+            }
+        },
+        inputs: 1,
+        outputs: 0,
+        icon: "font-awesome/fa-compass",
+        paletteLabel: "compass",
+        label: function() {
+            return this.name || this.label || 'compass';
+        },
+        oneditprepare: function() {
+            // Initialize the group selection
+            $("#node-input-group").typedInput({
+                type: "ui-group",
+                types: ["ui-group"]
+            });
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="ui-compass">
+    <div class="form-row">
+        <label for="node-input-group"><i class="fa fa-table"></i> Group</label>
+        <input type="text" id="node-input-group">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-label"><i class="fa fa-tag"></i> Label</label>
+        <input type="text" id="node-input-label" placeholder="Compass">
+    </div>
+    <div class="form-row">
+        <label for="node-input-width"><i class="fa fa-arrows-h"></i> Width</label>
+        <input type="number" id="node-input-width" placeholder="6" min="1" max="12">
+    </div>
+    <div class="form-row">
+        <label for="node-input-height"><i class="fa fa-arrows-v"></i> Height</label>
+        <input type="number" id="node-input-height" placeholder="2" min="1">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="ui-compass">
+    <p>A Dashboard 2.0 widget that displays compass heading in degrees.</p>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">number</span>
+        </dt>
+        <dd>The compass heading in degrees (0-360). Values outside this range will be normalized.</dd>
+    </dl>
+
+    <h3>Configuration</h3>
+    <dl class="message-properties">
+        <dt>Group</dt>
+        <dd>The Dashboard 2.0 group where this widget should appear.</dd>
+
+        <dt>Label</dt>
+        <dd>The label to display above the compass widget.</dd>
+
+        <dt>Width</dt>
+        <dd>The width of the widget in grid units (1-12). Default is 6.</dd>
+
+        <dt>Height</dt>
+        <dd>The height of the widget in grid units. Default is 2.</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p>This node displays the compass heading as a numeric value with a degree symbol.</p>
+    <p>The widget accepts numeric values representing compass headings:</p>
+    <ul>
+        <li>0° = North</li>
+        <li>90° = East</li>
+        <li>180° = South</li>
+        <li>270° = West</li>
+    </ul>
+    <p>Values are automatically normalized to the 0-360° range.</p>
+
+    <h3>Example</h3>
+    <pre>
+msg.payload = 45;  // Display "45°"
+return msg;
+    </pre>
+</script>

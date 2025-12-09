@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="4" height="30" viewBox="0 0 4 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <path d="M2 0L4 15L0 15L2 0Z" fill="#FF5252" fill-rule="evenodd" transform="translate(14 1)" />
+    <path d="M2 15L0 0L4 0L2 15Z" fill="#000000" fill-rule="evenodd" transform="translate(14 16)" />
+  </g>
+</svg>
