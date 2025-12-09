@@ -1,6 +1,6 @@
 {
   "name": "@wexgaard/node-red-dashboard-2-ui-compass",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A compass widget for Node-RED Dashboard 2.0 that displays directional heading (0-360 degrees)",
   "keywords": [
     "node-red",
