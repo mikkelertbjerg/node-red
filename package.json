@@ -11,11 +11,11 @@
     "direction",
     "heading"
   ],
-  "author": "",
+  "author": "Mikkel Ertbjerg",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/mikkelertbjerg/node-red.git"
   },
   "exports": {
     "import": "./resources/ui-compass.esm.js",
