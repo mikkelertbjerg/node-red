@@ -30,7 +30,7 @@ export default defineConfig({
         // Configure build as a UMD library
         lib: {
             entry: resolve(process.cwd(), 'ui/index.js'),
-            name: 'UICompass',
+            name: 'ui-compass',
             formats: ['es', 'umd'],
             fileName: (format) => {
                 if (format === 'es') {
