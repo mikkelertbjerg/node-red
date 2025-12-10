@@ -8,7 +8,7 @@
                 <!-- Visual Compass -->
                 <div class="compass-visual">
                     <!-- Compass Circle with Markings -->
-                    <svg class="compass-circle" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="compass-circle" viewBox="-10 -10 120 120" xmlns="http://www.w3.org/2000/svg">
                         <!-- Main circle -->
                         <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="2" />
 
@@ -33,6 +33,16 @@
                         <text x="73" y="73" text-anchor="middle" font-size="6" fill="currentColor" opacity="0.7">SE</text>
                         <text x="27" y="73" text-anchor="middle" font-size="6" fill="currentColor" opacity="0.7">SW</text>
                         <text x="27" y="30" text-anchor="middle" font-size="6" fill="currentColor" opacity="0.7">NW</text>
+
+                        <!-- Degree labels outside the circle -->
+                        <text v-for="deg in [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]"
+                              :key="`deg-${deg}`"
+                              :x="50 + 52 * Math.sin(deg * Math.PI / 180)"
+                              :y="50 - 52 * Math.cos(deg * Math.PI / 180) + 2"
+                              text-anchor="middle"
+                              font-size="5"
+                              fill="currentColor"
+                              opacity="0.6">{{ deg }}°</text>
                     </svg>
 
                     <!-- Rotating Needle (extends past circle) -->

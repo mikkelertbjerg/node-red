@@ -1,8 +1,7 @@
 import { resolve } from 'path'
-import { defineConfig, normalizePath } from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
-import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 const LIBRARY_NAME = 'ui-compass'
 
@@ -10,21 +9,7 @@ const LIBRARY_NAME = 'ui-compass'
 export default defineConfig({
     plugins: [
         vue(),
-        cssInjectedByJsPlugin(),
-        viteStaticCopy({
-            targets: [
-                {
-                    // Copy the build output into Node-RED's /resources folder
-                    src: normalizePath(resolve(process.cwd(), `./ui/dist/${LIBRARY_NAME}.umd.js`)),
-                    dest: normalizePath(resolve(process.cwd(), 'resources'))
-                },
-                {
-                    // Copy the ESM build too
-                    src: normalizePath(resolve(process.cwd(), `./ui/dist/${LIBRARY_NAME}.esm.js`)),
-                    dest: normalizePath(resolve(process.cwd(), 'resources'))
-                }
-            ]
-        })
+        cssInjectedByJsPlugin()
     ],
     build: {
         // Configure build as a UMD library
@@ -40,8 +25,8 @@ export default defineConfig({
             }
         },
 
-        // This is the target location for the build output
-        outDir: './ui/dist',
+        // Build directly to resources folder (required by Node-RED Dashboard 2.0)
+        outDir: './resources',
 
         // Declare dependencies that shouldn't be bundled into the library
         rollupOptions: {
